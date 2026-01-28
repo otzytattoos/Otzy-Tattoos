@@ -29,12 +29,15 @@
             top: 0;
             background: rgba(0,0,0,0.9);
             z-index: 1000;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 15px;
         }
 
         nav a {
             color: #888;
             text-decoration: none;
-            margin: 0 15px;
             font-size: 11px;
             letter-spacing: 3px;
             text-transform: uppercase;
@@ -45,9 +48,34 @@
             color: #fff;
         }
 
+        /* Selector de Idioma */
+        .lang-switcher {
+            margin-left: 20px;
+            display: flex;
+            gap: 10px;
+            border-left: 1px solid #222;
+            padding-left: 20px;
+        }
+
+        .lang-btn {
+            background: none;
+            border: none;
+            color: #444;
+            cursor: pointer;
+            font-size: 10px;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            padding: 0;
+            transition: 0.3s;
+        }
+
+        .lang-btn.active {
+            color: #fff;
+            font-weight: bold;
+        }
+
         header { padding: 80px 20px 40px 20px; }
         
-        /* Título simplificado */
         .brand-name { font-size: clamp(50px, 12vw, 80px); margin: 0; letter-spacing: 8px; text-transform: uppercase; font-weight: normal; }
         .studio-name { font-size: 14px; letter-spacing: 5px; color: #888; margin-top: 5px; text-transform: uppercase; }
         .badge { display: inline-block; border: 1px solid #333; padding: 8px 20px; font-size: 10px; letter-spacing: 4px; text-transform: uppercase; color: #aaa; margin-top: 25px; }
@@ -59,25 +87,22 @@
 
         .section-title { font-size: 18px; letter-spacing: 8px; text-transform: uppercase; margin: 80px 0 40px 0; color: #444; border-top: 1px solid #151515; padding-top: 60px; }
 
-        /* Portfolio */
         .portfolio-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px; }
         .work-item { overflow: hidden; border: 1px solid #111; }
         .work-item img { width: 100%; height: 450px; object-fit: cover; display: block; filter: grayscale(100%); transition: 0.8s ease; }
         .work-item img:hover { filter: grayscale(0%); transform: scale(1.03); }
 
-        /* Booking Card */
         .info-card { background: #050505; border: 1px solid #111; padding: 40px 20px; text-align: left; max-width: 700px; margin: 0 auto; }
         .info-card h4 { margin-top: 0; letter-spacing: 3px; color: #fff; text-transform: uppercase; font-size: 16px; border-bottom: 1px solid #222; padding-bottom: 10px; }
         .info-card ul { list-style: none; padding: 0; color: #888; line-height: 2; font-size: 15px; }
         .info-card ul li:before { content: "— "; color: #444; }
 
-        /* SECCIÓN DE CONTACTO */
         .contact-section { padding: 100px 20px; background-color: #030303; border-top: 1px solid #151515; }
         .contact-links { margin-bottom: 40px; }
         .contact-links a { display: block; color: #aaa; text-decoration: none; font-size: 18px; margin: 15px 0; letter-spacing: 2px; transition: 0.3s; }
         .contact-links a:hover { color: #fff; }
 
-        .btn { display: inline-block; text-decoration: none; padding: 20px 40px; transition: 0.3s; margin: 10px; font-weight: bold; width: 280px; letter-spacing: 2px; }
+        .btn { display: inline-block; text-decoration: none; padding: 20px 40px; transition: 0.3s; margin: 10px; font-weight: bold; width: 280px; letter-spacing: 2px; text-align: center; }
         .whatsapp-btn { background-color: #fff; color: #000; }
         .whatsapp-btn:hover { background-color: #25D366; color: #fff; }
 
@@ -87,44 +112,48 @@
 <body>
 
     <nav>
-        <a href="#portfolio">Portfolio</a>
-        <a href="#booking">Booking</a>
-        <a href="#contact">Contact</a>
+        <a href="#portfolio" data-key="nav-portfolio">Portfolio</a>
+        <a href="#booking" data-key="nav-booking">Booking</a>
+        <a href="#contact" data-key="nav-contact">Contact</a>
+        <div class="lang-switcher">
+            <button class="lang-btn active" onclick="setLanguage('en')">EN</button>
+            <button class="lang-btn" onclick="setLanguage('es')">ES</button>
+        </div>
     </nav>
 
     <header>
         <h1 class="brand-name">Otzy</h1>
-        <div class="studio-name">at Travel Tattoos</div>
-        <div class="badge">Licensed Artist | Destin, FL</div>
+        <div class="studio-name" data-key="studio-name">at Travel Tattoos</div>
+        <div class="badge" data-key="badge">Licensed Artist | Destin, FL</div>
     </header>
 
     <div class="content">
         <img src="https://i.postimg.cc/VNNnyjXr/IMG-0436.jpg" alt="Otzy" class="artist-photo">
-        <p class="bio-text">
+        <p class="bio-text" data-key="bio">
             Specializing in Fine Line, Traditional, and Custom Blackwork. Committed to clean aesthetics and permanent quality.
         </p>
 
-        <h3 id="portfolio" class="section-title">Portfolio</h3>
+        <h3 id="portfolio" class="section-title" data-key="title-portfolio">Portfolio</h3>
         <div class="portfolio-grid">
             <div class="work-item"><img src="https://i.postimg.cc/RhPQJX7X/PXL-20251228-013500643-RAW-01-COVER-Original.jpg"></div>
             <div class="work-item"><img src="https://i.postimg.cc/gcBZRX9K/PXL-20251230-025915335-PORTRAIT-2-Original.jpg"></div>
             <div class="work-item"><img src="https://i.postimg.cc/FzJs0Kc8/PXL-20251025-213626451-PORTRAIT-Original.jpg"></div>
         </div>
 
-        <h3 id="booking" class="section-title">Booking Info</h3>
+        <h3 id="booking" class="section-title" data-key="title-booking">Booking Info</h3>
         <div class="info-card">
-            <h4>How to Book</h4>
+            <h4 data-key="book-how">How to Book</h4>
             <ul>
-                <li>Send a reference image or idea</li>
-                <li>Mention the body placement</li>
-                <li>Deposits are required to secure dates</li>
-                <li>Deposits need to be in person</li>
+                <li data-key="book-1">Send a reference image or idea</li>
+                <li data-key="book-2">Mention the body placement</li>
+                <li data-key="book-3">Deposits are required to secure dates</li>
+                <li data-key="book-4">Deposits need to be in person</li>
             </ul>
         </div>
     </div>
 
     <div id="contact" class="contact-section">
-        <h3 style="letter-spacing: 8px; color: #444; text-transform: uppercase; margin-bottom: 50px;">Get in Touch</h3>
+        <h3 style="letter-spacing: 8px; color: #444; text-transform: uppercase; margin-bottom: 50px;" data-key="contact-title">Get in Touch</h3>
         
         <div class="contact-links">
             <a href="tel:8504018717">M: 850.401.8717</a>
@@ -132,7 +161,7 @@
             <a href="https://instagram.com/otzytattoos" target="_blank">@otzytattoos</a>
         </div>
 
-        <a href="https://wa.me/18504018717" class="btn whatsapp-btn">
+        <a href="https://wa.me/18504018717" class="btn whatsapp-btn" data-key="whatsapp-btn">
             MESSAGE ON WHATSAPP
         </a>
     </div>
@@ -140,6 +169,71 @@
     <footer>
         © 2026 OTZY | TRAVEL TATTOOS | DESTIN, FL
     </footer>
+
+    <script>
+        const translations = {
+            en: {
+                "nav-portfolio": "Portfolio",
+                "nav-booking": "Booking",
+                "nav-contact": "Contact",
+                "studio-name": "at Travel Tattoos",
+                "badge": "Licensed Artist | Destin, FL",
+                "bio": "Specializing in Fine Line, Traditional, and Custom Blackwork. Committed to clean aesthetics and permanent quality.",
+                "title-portfolio": "Portfolio",
+                "title-booking": "Booking Info",
+                "book-how": "How to Book",
+                "book-1": "Send a reference image or idea",
+                "book-2": "Mention the body placement",
+                "book-3": "Deposits are required to secure dates",
+                "book-4": "Deposits need to be in person",
+                "contact-title": "Get in Touch",
+                "whatsapp-btn": "MESSAGE ON WHATSAPP"
+            },
+            es: {
+                "nav-portfolio": "Portafolio",
+                "nav-booking": "Citas",
+                "nav-contact": "Contacto",
+                "studio-name": "en Travel Tattoos",
+                "badge": "Artista Licenciado | Destin, FL",
+                "bio": "Especializado en Fine Line, Tradicional y Blackwork personalizado. Comprometido con la estética limpia y la calidad permanente.",
+                "title-portfolio": "Portafolio",
+                "title-booking": "Información de Citas",
+                "book-how": "Cómo Reservar",
+                "book-1": "Envía una imagen de referencia o tu idea",
+                "book-2": "Menciona la zona del cuerpo",
+                "book-3": "Se requiere depósito para asegurar la fecha",
+                "book-4": "Los depósitos deben ser en persona",
+                "contact-title": "Contacto",
+                "whatsapp-btn": "MENSAJE POR WHATSAPP"
+            }
+        };
+
+        function setLanguage(lang) {
+            // Guardar preferencia
+            localStorage.setItem('preferredLang', lang);
+
+            // Actualizar textos
+            document.querySelectorAll('[data-key]').forEach(el => {
+                const key = el.getAttribute('data-key');
+                el.innerText = translations[lang][key];
+            });
+
+            // Actualizar botones del menú
+            document.querySelectorAll('.lang-btn').forEach(btn => {
+                btn.classList.remove('active');
+                if(btn.innerText.toLowerCase() === lang) btn.classList.add('active');
+            });
+
+            // Cambiar el atributo lang del HTML
+            document.documentElement.lang = lang;
+        }
+
+        // Cargar idioma preferido al iniciar
+        window.onload = () => {
+            const savedLang = localStorage.getItem('preferredLang') || 'en';
+            setLanguage(savedLang);
+        };
+    </script>
 
 </body>
 </html>
